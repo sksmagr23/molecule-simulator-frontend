@@ -1,69 +1,80 @@
-# React + TypeScript + Vite
+# Molecular Simulator Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based frontend for the Molecular Simulator application with Google OAuth integration and 3D molecular visualization.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Authentication**: Google OAuth 2.0 integration
+- **Responsive Design**: Modern UI with Tailwind CSS
+- **Routing**: React Router for seamless navigation
+- **3D Visualization**: Ready for molecular structure rendering
+- **Background**: Beautiful background image integration
 
-## Expanding the ESLint configuration
+## Setup Instructions
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. **Install Dependencies**
+   ```bash
+   npm install
+   ```
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+2. **Start Development Server**
+   ```bash
+   npm run dev
+   ```
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+3. **Build for Production**
+   ```bash
+   npm run build
+   ```
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Project Structure
+
+```
+src/
+├── pages/
+│   ├── Auth.tsx          # Authentication page with Google sign-in
+│   ├── Landing.tsx       # Dashboard after successful authentication
+│   └── Simulator.tsx     # Molecular visualization platform
+├── App.tsx               # Main app with routing
+├── main.tsx              # Entry point
+└── index.css             # Global styles with background image
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Pages
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Auth Page (`/auth`)
+- Starting page with "Molecule Simulator" title
+- Centered Google sign-in button
+- Beautiful background with molecular theme
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Landing Page (`/landing`)
+- Welcome message after successful authentication
+- Feature overview cards
+- Navigation to simulator
+
+### Simulator Page (`/simulator`)
+- Placeholder for molecular visualization
+- Navigation back to dashboard
+- Ready for 3D rendering implementation
+
+## Backend Integration
+
+The frontend integrates with the backend at `http://localhost:3000`:
+- Google OAuth flow starts at `/auth/google`
+- Successful authentication redirects to `/landing`
+- Logout handled through backend endpoint
+
+## Technologies Used
+
+- **React 19** with TypeScript
+- **Vite** for build tooling
+- **Tailwind CSS** for styling
+- **React Router** for navigation
+- **Three.js** ready for 3D graphics
+
+## Development
+
+- **Port**: 5173 (Vite default)
+- **Hot Reload**: Enabled in development mode
+- **TypeScript**: Full type safety
+- **ESLint**: Code quality and consistency
