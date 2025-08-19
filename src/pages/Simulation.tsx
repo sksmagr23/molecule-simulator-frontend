@@ -18,6 +18,7 @@ const Simulation = () => {
   const { file } = useFile();
   const mountRef = useRef<HTMLDivElement | null>(null);
   const [atoms, setAtoms] = useState<Frame[]>([]);
+  const [zoom, setZoom] = useState(20);
 
   // Parse .lammpstrj file
   useEffect(() => {
@@ -46,7 +47,7 @@ const Simulation = () => {
     renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
     mountRef.current.appendChild(renderer.domElement);
 
-    camera.position.z = 20;
+    camera.position.z = zoom;
 
     const spheres: THREE.Mesh[] = [];
 
@@ -74,6 +75,7 @@ const Simulation = () => {
         loadFrame(atoms[frame]);
         frame = (frame + 1) % atoms.length;
       }
+      camera.position.z = zoom;
       renderer.render(scene, camera);
     };
     animate();
@@ -81,19 +83,38 @@ const Simulation = () => {
     return () => {
       mountRef.current?.removeChild(renderer.domElement);
     };
-  }, [atoms]);
+  }, [atoms, zoom]);
+
+  useEffect(() => {
+    if (!mountRef.current) return;
+    const canvas = mountRef.current.querySelector("canvas");
+    if (!canvas) return;
+    // We'll update camera position in render loop automatically
+  }, [zoom]);
 
   return (
     <div className="w-full h-screen bg-black">
       <Link 
   to="/landing" 
-  className="inline-block px-6 py-3 text-lg font-semibold text-black bg-amber-300 rounded-xl shadow-md 
-             hover:bg-amber-400 hover:shadow-lg hover:scale-105 transition-transform duration-200 ease-in-out"
+  className="inline-flex items-center gap-2 px-6 py-3 text-lg font-semibold text-white 
+           bg-gradient-to-r from-blue-500 to-green-400 rounded-2xl shadow-lg 
+           hover:from-blue-600 hover:to-green-500 hover:shadow-xl hover:scale-105 
+           transition-all duration-300 ease-in-out"
 >
   ⬅ Back to Home
 </Link>
 
-      <div ref={mountRef} className="w-full h-full" />
+      <div ref={mountRef} className="w-[70vw] h-[70vh]" />
+      <div className="absolute bottom-5 w-full flex justify-center">
+        <input
+          type="range"
+          min="5"
+          max="50"
+          value={zoom}
+          onChange={(e) => setZoom(Number(e.target.value))}
+          className="w-1/2"
+        />
+      </div>
     </div>
   );
 };
