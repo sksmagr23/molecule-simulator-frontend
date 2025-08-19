@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { useFile } from "../contexts/FileContext";
+import { Link } from "react-router-dom";
 
 type Atom = {
   id: number;
@@ -84,6 +85,14 @@ const Simulation = () => {
 
   return (
     <div className="w-full h-screen bg-black">
+      <Link 
+  to="/landing" 
+  className="inline-block px-6 py-3 text-lg font-semibold text-black bg-amber-300 rounded-xl shadow-md 
+             hover:bg-amber-400 hover:shadow-lg hover:scale-105 transition-transform duration-200 ease-in-out"
+>
+  ⬅ Back to Home
+</Link>
+
       <div ref={mountRef} className="w-full h-full" />
     </div>
   );

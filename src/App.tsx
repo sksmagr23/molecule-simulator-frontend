@@ -12,22 +12,22 @@ const App = () => {
       <FileProvider>
         <Router>
           <Routes>
-            <Route path="/" element={<Navigate to="/auth" replace />} />
-            <Route path="/auth" element={<Auth />} />
+            <Route path="/" element={<Navigate to="/landing" replace />} />
+            {/* <Route path="/auth" element={<Auth />} /> */}
             <Route 
               path="/landing" 
               element={
-                <ProtectedRoute>
+                // <ProtectedRoute>
                   <Landing />
-                </ProtectedRoute>
+                // </ProtectedRoute>
               } 
             />
             <Route 
               path="/simulation" 
               element={
-                <ProtectedRoute>
+                // <ProtectedRoute>
                   <Simulation />
-                </ProtectedRoute>
+                // </ProtectedRoute>
               } 
             />
           </Routes>
