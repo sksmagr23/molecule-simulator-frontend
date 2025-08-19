@@ -3,7 +3,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-image: url('/bg.jpg');
+  background: linear-gradient(90deg, rgba(9, 76, 128, 1) 0%, rgba(0, 89, 58, 1) 65%, rgba(12, 77, 1, 1) 100%);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
