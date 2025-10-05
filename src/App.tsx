@@ -23,7 +23,7 @@ const App = () => {
               } 
             />
             <Route 
-              path="/simulation" 
+              path="/simulation/:fileId" 
               element={
                 <ProtectedRoute>
                   <Simulation />
