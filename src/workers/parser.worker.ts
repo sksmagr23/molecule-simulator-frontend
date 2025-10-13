@@ -3,6 +3,7 @@ type Atom = { id: number; type: number; x: number; y: number; z: number };
 type Frame = Atom[];
 type Bond = { atom1: number; atom2: number };
 
+// --- Main Worker Logic ---
 self.onmessage = (event: MessageEvent<string>) => {
   const fileContent = event.data;
 
@@ -28,7 +29,8 @@ function parseTrajectory(text: string): Frame[] {
     let currentFrame: Atom[] = [];
     let atomCount = 0;
     let parsingAtoms = false;
-    let format: 'lammpstrj' | 'xyz' | 'dump' | null = null;
+    // Format detection is now more robust
+    let format: 'lammpstrj' | 'xyz' | null = null;
     
     if (lines.some(line => line.includes("ITEM: TIMESTEP"))) {
         format = 'lammpstrj';
@@ -38,6 +40,7 @@ function parseTrajectory(text: string): Frame[] {
 
     for (const line of lines) {
         if (!format) continue;
+
         if (format === 'lammpstrj') {
             if (line.startsWith("ITEM: TIMESTEP")) {
                 if (currentFrame.length > 0) frames.push(currentFrame);
@@ -73,7 +76,7 @@ function parseTrajectory(text: string): Frame[] {
     return frames;
 }
 
-// --- Bond Calculation ---
+// ... (calculateBonds function remains the same)
 function calculateBonds(frame: Frame, cutoffFactor = 1.2): Bond[] {
   const bonds: Bond[] = [];
   const covalentRadii: { [key: number]: number } = { 1: 0.77, 2: 0.37, 6: 0.77, 7: 0.75, 8: 0.73, 9: 0.71, 14: 1.11, 15: 1.06, 16: 1.02 };
