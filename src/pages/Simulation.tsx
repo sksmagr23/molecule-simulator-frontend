@@ -192,11 +192,11 @@ const Simulation = () => {
       </div>
     );
   }
-
+  
   return (
     <div className="w-full h-screen bg-black flex flex-col overflow-hidden">
         <div className="absolute top-4 left-4 bg-gray-800/80 text-white p-4 rounded-lg backdrop-blur-sm border border-white/10 w-80 space-y-4 z-10">
-            <h2 className="text-xl font-bold border-b border-white/20 pb-2">VMD Controls</h2>
+            <h2 className="text-xl font-bold border-b border-white/20 pb-2">Simulation Controls</h2>
             <div className="space-y-2">
                 <div className="flex items-center justify-between">
                     <button onClick={() => setIsPlaying(!isPlaying)} className="bg-gray-700 px-4 py-1 rounded hover:bg-gray-600 w-24">{isPlaying ? "Pause" : "Play"}</button>
